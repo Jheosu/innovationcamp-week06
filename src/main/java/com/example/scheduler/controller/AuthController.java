@@ -7,10 +7,7 @@ import com.example.scheduler.dto.TokenRequestDto;
 import com.example.scheduler.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -18,11 +15,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
     private final AuthService authService;
 
+
+    @CrossOrigin("*")
     @PostMapping("/signup")
     public ResponseEntity<MemberResponseDto> signup(@RequestBody MemberRequestDto memberRequestDto) {
+        System.out.println(memberRequestDto);
+        System.out.println("hihi");
         return ResponseEntity.ok(authService.signup(memberRequestDto));
     }
 
+    @CrossOrigin("*")
     @PostMapping("/login")
     public ResponseEntity<TokenDto> login(@RequestBody MemberRequestDto memberRequestDto) {
         return ResponseEntity.ok(authService.login(memberRequestDto));
