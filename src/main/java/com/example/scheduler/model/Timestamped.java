@@ -18,5 +18,5 @@ public abstract class Timestamped {
     private LocalDateTime createdAt;
 
     @LastModifiedDate // 마지막 수정일자
-    private LocalDateTime updatedAt;
+    private LocalDateTime modifiedAt;
 }

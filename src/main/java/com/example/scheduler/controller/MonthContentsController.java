@@ -38,7 +38,7 @@ public class MonthContentsController {
     @PostMapping("/api/post/month")
     public String createContents(@RequestBody MonthContentsPostRequestDto monthContentsPostRequestDto,
                                  @AuthenticationPrincipal Member member) {
-        return monthContentsService.createContents(monthContentsPostRequestDto, (UserDetails) member);
+        return monthContentsService.createContents(monthContentsPostRequestDto);
 
     }
 
@@ -47,13 +47,13 @@ public class MonthContentsController {
     public String updateCotents(@PathVariable Long postId,
                                 @RequestBody MonthContentsPostRequestDto monthContentsPostRequestDto,
                                 @AuthenticationPrincipal Member member){
-        return monthContentsService.updateContents(monthContentsPostRequestDto, postId, (UserDetails) member);
+        return monthContentsService.updateContents(monthContentsPostRequestDto, postId);
     }
 
     //일정 삭제
     @DeleteMapping("/api/post/month/{postId}")
     public String deleteContents(@PathVariable Long postId, @AuthenticationPrincipal Member member){
-        return monthContentsService.deleteContents(postId, (UserDetails) member);
+        return monthContentsService.deleteContents(postId);
 
     }
 
