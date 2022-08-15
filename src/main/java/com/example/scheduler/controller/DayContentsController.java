@@ -28,9 +28,9 @@ public class DayContentsController {
     }
 
     // 일정 조회
-    @GetMapping("/api/post/day/{id}")
-    public Optional<DayContents> getContent(@PathVariable Long id){
-        return dayContentsService.getContent(id);
+    @GetMapping("/api/post/day/{postId}")
+    public Optional<DayContents> getContent(@PathVariable Long postId){
+        return dayContentsService.getContent(postId);
     }
 
 
@@ -43,17 +43,17 @@ public class DayContentsController {
     }
 
     // 일정 수정
-    @PutMapping("/api/post/day/{id}")
-    public String updateCotents(@PathVariable Long id,
+    @PutMapping("/api/post/day/{postId}")
+    public String updateCotents(@PathVariable Long postId,
                                 @RequestBody DayContentsPostRequestDto dayContentsPostRequestDto,
                                 @AuthenticationPrincipal Member member){
-        return dayContentsService.updateContents(dayContentsPostRequestDto, id, (UserDetails) member);
+        return dayContentsService.updateContents(dayContentsPostRequestDto, postId, (UserDetails) member);
     }
 
     //일정 삭제
-    @DeleteMapping("/api/post/day/{id}")
-    public String deleteContents(@PathVariable Long id, @AuthenticationPrincipal Member member){
-        return dayContentsService.deleteContents(id, (UserDetails) member);
+    @DeleteMapping("/api/post/day/{postId}")
+    public String deleteContents(@PathVariable Long postId, @AuthenticationPrincipal Member member){
+        return dayContentsService.deleteContents(postId, (UserDetails) member);
 
     }
 

@@ -28,9 +28,9 @@ public class MonthContentsController {
     }
 
     // 일정 조회
-    @GetMapping("/api/post/month/{id}")
-    public Optional<MonthContents> getContent(@PathVariable Long id){
-        return monthContentsService.getContent(id);
+    @GetMapping("/api/post/month/{postId}")
+    public Optional<MonthContents> getContent(@PathVariable Long postId){
+        return monthContentsService.getContent(postId);
     }
 
 
@@ -43,17 +43,17 @@ public class MonthContentsController {
     }
 
     // 일정 수정
-    @PutMapping("/api/post/month/{id}")
-    public String updateCotents(@PathVariable Long id,
+    @PutMapping("/api/post/month/{postId}")
+    public String updateCotents(@PathVariable Long postId,
                                 @RequestBody MonthContentsPostRequestDto monthContentsPostRequestDto,
                                 @AuthenticationPrincipal Member member){
-        return monthContentsService.updateContents(monthContentsPostRequestDto, id, (UserDetails) member);
+        return monthContentsService.updateContents(monthContentsPostRequestDto, postId, (UserDetails) member);
     }
 
     //일정 삭제
-    @DeleteMapping("/api/post/month/{id}")
-    public String deleteContents(@PathVariable Long id, @AuthenticationPrincipal Member member){
-        return monthContentsService.deleteContents(id, (UserDetails) member);
+    @DeleteMapping("/api/post/month/{postId}")
+    public String deleteContents(@PathVariable Long postId, @AuthenticationPrincipal Member member){
+        return monthContentsService.deleteContents(postId, (UserDetails) member);
 
     }
 

@@ -2,10 +2,7 @@ package com.example.scheduler.controller;
 
 import com.example.scheduler.dto.WeekContentsPostRequestDto;
 import com.example.scheduler.model.Member;
-import com.example.scheduler.dto.DayContentsPostRequestDto;
-import com.example.scheduler.model.DayContents;
 import com.example.scheduler.model.WeekContents;
-import com.example.scheduler.service.DayContentsService;
 import com.example.scheduler.service.WeekContentsService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,9 +28,9 @@ public class WeekContentsController {
     }
 
     // 일정 조회
-    @GetMapping("/api/contents/week/{id}")
-    public Optional<WeekContents> getContent(@PathVariable Long id){
-        return weekContentsService.getContent(id);
+    @GetMapping("/api/contents/week/{postId}")
+    public Optional<WeekContents> getContent(@PathVariable Long postId){
+        return weekContentsService.getContent(postId);
     }
 
 
@@ -46,17 +43,17 @@ public class WeekContentsController {
     }
 
     // 일정 수정
-    @PutMapping("/api/contents/week/{id}")
-    public String updateCotents(@PathVariable Long id,
+    @PutMapping("/api/contents/week/{postId}")
+    public String updateCotents(@PathVariable Long postId,
                                 @RequestBody WeekContentsPostRequestDto weekContentsPostRequestDto,
                                 @AuthenticationPrincipal Member member){
-        return weekContentsService.updateContents(weekContentsPostRequestDto, id, (UserDetails) member);
+        return weekContentsService.updateContents(weekContentsPostRequestDto, postId, (UserDetails) member);
     }
 
     //일정 삭제
-    @DeleteMapping("/api/contents/week/{id}")
-    public String deleteContents(@PathVariable Long id, @AuthenticationPrincipal Member member){
-        return weekContentsService.deleteContents(id, (UserDetails) member);
+    @DeleteMapping("/api/contents/week/{postId}")
+    public String deleteContents(@PathVariable Long postId, @AuthenticationPrincipal Member member){
+        return weekContentsService.deleteContents(postId, (UserDetails) member);
 
     }
 
