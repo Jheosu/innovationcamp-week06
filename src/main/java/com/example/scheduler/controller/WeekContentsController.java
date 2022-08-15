@@ -38,7 +38,7 @@ public class WeekContentsController {
     @PostMapping("/api/contents/week")
     public String createContents(@RequestBody WeekContentsPostRequestDto weekContentsPostRequestDto,
                                  @AuthenticationPrincipal Member member) {
-        return weekContentsService.createContents(weekContentsPostRequestDto, (UserDetails) member);
+        return weekContentsService.createContents(weekContentsPostRequestDto);
 
     }
 
@@ -47,13 +47,13 @@ public class WeekContentsController {
     public String updateCotents(@PathVariable Long postId,
                                 @RequestBody WeekContentsPostRequestDto weekContentsPostRequestDto,
                                 @AuthenticationPrincipal Member member){
-        return weekContentsService.updateContents(weekContentsPostRequestDto, postId, (UserDetails) member);
+        return weekContentsService.updateContents(weekContentsPostRequestDto, postId);
     }
 
     //일정 삭제
     @DeleteMapping("/api/contents/week/{postId}")
     public String deleteContents(@PathVariable Long postId, @AuthenticationPrincipal Member member){
-        return weekContentsService.deleteContents(postId, (UserDetails) member);
+        return weekContentsService.deleteContents(postId);
 
     }
 
