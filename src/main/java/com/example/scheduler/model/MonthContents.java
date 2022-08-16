@@ -1,11 +1,14 @@
 package com.example.scheduler.model;
 
 import com.example.scheduler.dto.MonthContentsPostRequestDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+
+import static javax.persistence.FetchType.LAZY;
 
 @NoArgsConstructor
 @Getter
@@ -27,7 +30,9 @@ public class MonthContents extends Timestamped {
     private String title;
 
     // LAZY - 삭제 동작 안해서 다시 변경
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "member_id")
     private Member member;
 
     public MonthContents(String nickname, String contents) {
@@ -36,7 +41,14 @@ public class MonthContents extends Timestamped {
     }
 
     public void update(MonthContentsPostRequestDto requestDto) {
+        this.title = requestDto.getTitle();
         this.contents = requestDto.getContents();
+    }
+
+
+    public void confirmPost(Member member) {
+        this.member = member;
+        member.addMonthlist(this);
     }
 
     public MonthContents(MonthContentsPostRequestDto requestDto) {

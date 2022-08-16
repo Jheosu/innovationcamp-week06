@@ -2,7 +2,9 @@ package com.example.scheduler.service;
 
 import com.example.scheduler.dto.DayContentsPostRequestDto;
 import com.example.scheduler.model.DayContents;
+import com.example.scheduler.model.Member;
 import com.example.scheduler.repository.DayContentsRepository;
+import com.example.scheduler.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,8 @@ public class DayContentsService {
 
     private final DayContentsRepository dayContentsRepository;
 
+    private final MemberRepository memberRepository;
+
     private final MemberService memberService;
 
     public List<DayContents> getContents() {
@@ -30,7 +34,11 @@ public class DayContentsService {
 
     public String createContents(DayContentsPostRequestDto dayContentsPostRequestDto) {
         dayContentsPostRequestDto.setNickname(getNickname());
+        Member member = memberRepository.findById(memberService.getMyInfo().getId()).orElseThrow(() -> new RuntimeException("해당하는 유저가 없습니다"));
+
         DayContents dayContents = new DayContents(dayContentsPostRequestDto);
+        dayContents.confirmPost(member);
+
         dayContentsRepository.save(dayContents);
         return "등록완료";
     }
@@ -43,7 +51,7 @@ public class DayContentsService {
         String msg;
         if (dayContents.getNickname().equals(getNickname())) {
             String dayContent = dayContentsPostRequestDto.getContents();
-            dayContents.setContents(dayContent);
+            dayContents.update(dayContentsPostRequestDto);
             dayContentsRepository.save(dayContents);
             msg = "수정완료";
         } else {

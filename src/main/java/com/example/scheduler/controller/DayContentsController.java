@@ -6,7 +6,6 @@ import com.example.scheduler.model.Member;
 import com.example.scheduler.repository.DayContentsRepository;
 import com.example.scheduler.service.DayContentsService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,15 +35,16 @@ public class DayContentsController {
         return dayContentsService.getContent(postId);
     }
 
-    @GetMapping("/api/post/dayname")
-    public List<DayContents> getContentname(@RequestBody DayContentsPostRequestDto dayContentsPostRequestDto) {
-        return dayContentsRepository.findByNickname(dayContentsPostRequestDto.getNickname());
+    @GetMapping("/api/post/day/name/{nickname}")
+    public List<DayContents> getContentname(@PathVariable String nickname) {
+        return dayContentsRepository.findByNickname(nickname);
     }
 
 
     // 일정 생성
     @PostMapping("/api/post/day")
     public String createContents(@RequestBody DayContentsPostRequestDto dayContentsPostRequestDto) {
+        System.out.println("포스팅 생성");
         return dayContentsService.createContents(dayContentsPostRequestDto);
     }
 
@@ -52,6 +52,8 @@ public class DayContentsController {
     @PutMapping("/api/post/day/{postId}")
     public String updateCotents(@PathVariable Long postId,
                                 @RequestBody DayContentsPostRequestDto dayContentsPostRequestDto) {
+
+        System.out.println(dayContentsPostRequestDto.getContents());
         return dayContentsService.updateContents(dayContentsPostRequestDto, postId);
     }
 
