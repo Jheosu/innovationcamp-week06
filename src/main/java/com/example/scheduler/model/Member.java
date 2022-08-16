@@ -1,5 +1,6 @@
 package com.example.scheduler.model;
 
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Table(name = "member")
 @Entity
-public class Member {
+public class Member  {
 
     @Id
     @Column(name = "member_id")
@@ -22,6 +23,8 @@ public class Member {
     private String username;
     @Column(nullable = false)
     private String password;
+
+
 
     @Enumerated(EnumType.STRING)
     private Authority authority;

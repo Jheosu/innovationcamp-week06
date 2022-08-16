@@ -3,6 +3,7 @@ package com.example.scheduler.controller;
 import com.example.scheduler.dto.DayContentsPostRequestDto;
 import com.example.scheduler.model.DayContents;
 import com.example.scheduler.model.Member;
+import com.example.scheduler.repository.DayContentsRepository;
 import com.example.scheduler.service.DayContentsService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +16,11 @@ import java.util.Optional;
 public class DayContentsController {
 
     private final DayContentsService dayContentsService;
+    private final DayContentsRepository dayContentsRepository;
 
-    public DayContentsController(DayContentsService dayContentsService) {
+    public DayContentsController(DayContentsService dayContentsService, DayContentsRepository dayContentsRepository) {
         this.dayContentsService = dayContentsService;
+        this.dayContentsRepository = dayContentsRepository;
     }
 
 
@@ -32,13 +35,16 @@ public class DayContentsController {
         return dayContentsService.getContent(postId);
     }
 
+    @GetMapping("/api/post/dayname")
+    public List<DayContents> getContentname(@RequestBody DayContentsPostRequestDto dayContentsPostRequestDto) {
+        return dayContentsRepository.findByNickname(dayContentsPostRequestDto.getNickname());
+    }
+
 
     // 일정 생성
     @PostMapping("/api/post/day")
     public String createContents(@RequestBody DayContentsPostRequestDto dayContentsPostRequestDto) {
-
         return dayContentsService.createContents(dayContentsPostRequestDto);
-
     }
 
     // 일정 수정
