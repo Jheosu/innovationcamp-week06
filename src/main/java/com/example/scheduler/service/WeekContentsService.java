@@ -1,15 +1,8 @@
 package com.example.scheduler.service;
 
-import com.example.scheduler.dto.DayContentsPostRequestDto;
-import com.example.scheduler.dto.MonthContentsPostRequestDto;
 import com.example.scheduler.dto.WeekContentsPostRequestDto;
-import com.example.scheduler.model.DayContents;
-import com.example.scheduler.model.MonthContents;
 import com.example.scheduler.model.WeekContents;
-import com.example.scheduler.repository.DayContentsRepository;
-import com.example.scheduler.repository.MonthContentsRepository;
 import com.example.scheduler.repository.WeekContentsRepository;
-import jdk.javadoc.internal.doclets.formats.html.Contents;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

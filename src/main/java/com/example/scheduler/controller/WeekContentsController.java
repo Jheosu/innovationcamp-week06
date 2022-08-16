@@ -5,7 +5,6 @@ import com.example.scheduler.model.Member;
 import com.example.scheduler.model.WeekContents;
 import com.example.scheduler.service.WeekContentsService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
