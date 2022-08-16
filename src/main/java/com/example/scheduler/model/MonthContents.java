@@ -1,11 +1,9 @@
 package com.example.scheduler.model;
 
-import com.example.scheduler.dto.DayContentsPostRequestDto;
 import com.example.scheduler.dto.MonthContentsPostRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 
@@ -14,32 +12,36 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "Monthcontents")
-public class MonthContents extends  Timestamped{
+public class MonthContents extends Timestamped {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Long id;
 
-    @Column(nullable =false)
-    private String username;
+    @Column(nullable = false)
+    private String nickname;
 
-    @Column(nullable =false)
+    @Column(nullable = false)
     private String contents;
+
+    @Column(nullable = false)
+    private String title;
 
     // LAZY - 삭제 동작 안해서 다시 변경
     @ManyToOne
     private Member member;
 
-    public MonthContents(String username, String contents){
-        this.username = username;
+    public MonthContents(String nickname, String contents) {
+        this.nickname = nickname;
         this.contents = contents;
     }
 
-    public void update(DayContentsPostRequestDto requestDto){
+    public void update(MonthContentsPostRequestDto requestDto) {
         this.contents = requestDto.getContents();
     }
 
-    public MonthContents(MonthContentsPostRequestDto requestDto, UserDetails userDetails){
+    public MonthContents(MonthContentsPostRequestDto requestDto) {
         this.contents = requestDto.getContents();
-        this.username = userDetails.getUsername();
+        this.title = requestDto.getTitle();
+        this.nickname = requestDto.getNickname();
     }
 }

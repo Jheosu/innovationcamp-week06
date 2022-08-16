@@ -13,7 +13,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Daycontents")
 public class DayContents extends Timestamped {
-
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Long id;

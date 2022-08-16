@@ -22,38 +22,38 @@ public class WeekContentsController {
     }
 
 
-    @GetMapping("/api/contents/week")
+    @GetMapping("/api/post/week")
     public List<WeekContents> getContents() {
         return weekContentsService.getContents();
     }
 
     // 일정 조회
-    @GetMapping("/api/contents/week/{postId}")
+    @GetMapping("/api/post/week/{postId}")
     public Optional<WeekContents> getContent(@PathVariable Long postId){
         return weekContentsService.getContent(postId);
     }
 
 
     // 일정 생성
-    @PostMapping("/api/contents/week")
+    @PostMapping("/api/post/week")
     public String createContents(@RequestBody WeekContentsPostRequestDto weekContentsPostRequestDto,
                                  @AuthenticationPrincipal Member member) {
-        return weekContentsService.createContents(weekContentsPostRequestDto, (UserDetails) member);
+        return weekContentsService.createContents(weekContentsPostRequestDto);
 
     }
 
     // 일정 수정
-    @PutMapping("/api/contents/week/{postId}")
+    @PutMapping("/api/post/week/{postId}")
     public String updateCotents(@PathVariable Long postId,
                                 @RequestBody WeekContentsPostRequestDto weekContentsPostRequestDto,
                                 @AuthenticationPrincipal Member member){
-        return weekContentsService.updateContents(weekContentsPostRequestDto, postId, (UserDetails) member);
+        return weekContentsService.updateContents(weekContentsPostRequestDto, postId);
     }
 
     //일정 삭제
-    @DeleteMapping("/api/contents/week/{postId}")
+    @DeleteMapping("/api/post/week/{postId}")
     public String deleteContents(@PathVariable Long postId, @AuthenticationPrincipal Member member){
-        return weekContentsService.deleteContents(postId, (UserDetails) member);
+        return weekContentsService.deleteContents(postId);
 
     }
 
