@@ -1,8 +1,10 @@
 package com.example.scheduler.service;
 
 import com.example.scheduler.dto.DayContentsPostRequestDto;
+import com.example.scheduler.dto.DayWeekRequestDto;
 import com.example.scheduler.model.DayContents;
 import com.example.scheduler.model.Member;
+import com.example.scheduler.model.WeekContents;
 import com.example.scheduler.repository.DayContentsRepository;
 import com.example.scheduler.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,12 +35,14 @@ public class DayContentsService {
     }
 
 
-    public String createContents(DayContentsPostRequestDto dayContentsPostRequestDto) {
-        dayContentsPostRequestDto.setNickname(getNickname());
+    public String createContents(DayWeekRequestDto requestDto) {
+        requestDto.setNickname(getNickname());
         Member member = memberRepository.findById(memberService.getMyInfo().getId()).orElseThrow(() -> new RuntimeException("해당하는 유저가 없습니다"));
-        dayContentsPostRequestDto.setDaynum(getDayOfWeek());
-        DayContents dayContents = new DayContents(dayContentsPostRequestDto);
+        requestDto.setDaynum(getDayOfWeek());
+        DayContents dayContents = new DayContents(requestDto);
         dayContents.confirmPost(member);
+        WeekContents weekContents = new WeekContents(requestDto);
+        weekContents.confirmPost(member);
 
         dayContentsRepository.save(dayContents);
         return "등록완료";

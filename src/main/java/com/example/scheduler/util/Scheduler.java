@@ -31,7 +31,7 @@ public class Scheduler {
 
     private final MemberService memberService;
 
-    @Scheduled(cron = "0 0/1 * * * *")
+    @Scheduled(cron = "0 0/2 * * * *")
     @Transactional
     public void deleteday() {
         dayContentsRepository.deleteAll();
