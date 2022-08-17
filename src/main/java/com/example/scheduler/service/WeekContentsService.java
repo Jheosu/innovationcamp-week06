@@ -1,6 +1,6 @@
 package com.example.scheduler.service;
 
-import com.example.scheduler.dto.WeekContentsPostRequestDto;
+import com.example.scheduler.dto.DayWeekRequestDto;
 import com.example.scheduler.model.Member;
 import com.example.scheduler.model.WeekContents;
 import com.example.scheduler.repository.MemberRepository;
@@ -31,11 +31,11 @@ public class WeekContentsService {
     }
 
 
-    public String createContents(WeekContentsPostRequestDto weekContentsPostRequestDto) {
-        weekContentsPostRequestDto.setNickname(getNickname());
+    public String createContents(DayWeekRequestDto requestDto) {
+        requestDto.setNickname(getNickname());
         Member member = memberRepository.findById(memberService.getMyInfo().getId()).orElseThrow(() -> new RuntimeException("해당하는 유저가 없습니다"));
 
-        WeekContents weekContents = new WeekContents(weekContentsPostRequestDto);
+        WeekContents weekContents = new WeekContents(requestDto);
         weekContents.confirmPost(member);
 
         weekContentsRepository.save(weekContents);
@@ -44,13 +44,12 @@ public class WeekContentsService {
 
 
     @Transactional
-    public String updateContents(WeekContentsPostRequestDto weekContentsPostRequestDto, Long id) {
+    public String updateContents(DayWeekRequestDto requestDto, Long id) {
         WeekContents weekContents = weekContentsRepository.findById(id)
                 .orElseThrow(() -> new NullPointerException("해당 게시글이 존재하지 않습니다."));
         String msg;
         if (weekContents.getNickname().equals(getNickname())) {
-            String weekContent = weekContentsPostRequestDto.getContents();
-            weekContents.update(weekContentsPostRequestDto);
+            weekContents.update(requestDto);
             weekContentsRepository.save(weekContents);
             msg = "수정완료";
         } else {

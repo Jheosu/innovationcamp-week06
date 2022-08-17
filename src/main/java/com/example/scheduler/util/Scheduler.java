@@ -1,12 +1,11 @@
 package com.example.scheduler.util;
 
-import com.example.scheduler.dto.DayContentsPostRequestDto;
+import com.example.scheduler.dto.DayWeekRequestDto;
 import com.example.scheduler.model.DayContents;
 import com.example.scheduler.model.Member;
 import com.example.scheduler.model.WeekContents;
 import com.example.scheduler.repository.DayContentsRepository;
 import com.example.scheduler.repository.MemberRepository;
-import com.example.scheduler.repository.MonthContentsRepository;
 import com.example.scheduler.repository.WeekContentsRepository;
 import com.example.scheduler.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +26,6 @@ public class Scheduler {
 
     private final MemberRepository memberRepository;
 
-    private final MonthContentsRepository monthContentsRepository;
 
     private final MemberService memberService;
 
@@ -45,7 +43,7 @@ public class Scheduler {
 
         if (weekContentsList != null) {
             for (WeekContents weekContents : weekContentsList) {
-                DayContentsPostRequestDto requestDto = DayContentsPostRequestDto.builder()
+                DayWeekRequestDto requestDto = DayWeekRequestDto.builder()
                         .title(weekContents.getTitle())
                         .contents(weekContents.getContents())
                         .nickname(weekContents.getNickname())
@@ -67,11 +65,6 @@ public class Scheduler {
         log.info("게시글이 삭제 되었습니다");
     }
 
-    @Scheduled(cron = "0 0 0 1 * *")
-    public void deletemonth() {
-        monthContentsRepository.deleteAll();
-        log.info("게시글이 삭제 되었습니다");
-    }
 
     public int getDayOfWeek() {
         Calendar rightNow = Calendar.getInstance();

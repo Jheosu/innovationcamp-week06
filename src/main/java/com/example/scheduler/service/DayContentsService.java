@@ -1,6 +1,5 @@
 package com.example.scheduler.service;
 
-import com.example.scheduler.dto.DayContentsPostRequestDto;
 import com.example.scheduler.dto.DayWeekRequestDto;
 import com.example.scheduler.model.DayContents;
 import com.example.scheduler.model.Member;
@@ -50,13 +49,13 @@ public class DayContentsService {
 
 
     @Transactional
-    public String updateContents(DayContentsPostRequestDto dayContentsPostRequestDto, Long id) {
+    public String updateContents(DayWeekRequestDto requestDto, Long id) {
         DayContents dayContents = dayContentsRepository.findById(id)
                 .orElseThrow(() -> new NullPointerException("해당 게시글이 존재하지 않습니다."));
         String msg;
         if (dayContents.getNickname().equals(getNickname())) {
-            String dayContent = dayContentsPostRequestDto.getContents();
-            dayContents.update(dayContentsPostRequestDto);
+            String dayContent = requestDto.getContents();
+            dayContents.update(requestDto);
             dayContentsRepository.save(dayContents);
             msg = "수정완료";
         } else {

@@ -3,7 +3,6 @@ package com.example.scheduler.dto;
 
 import com.example.scheduler.model.DayContents;
 import com.example.scheduler.model.Member;
-import com.example.scheduler.model.MonthContents;
 import com.example.scheduler.model.WeekContents;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,16 +23,13 @@ public class MemberResponseDto {
 
     private List<WeekContents> weeklist;
 
-    private List<MonthContents> monthlist;
-
 
     public static MemberResponseDto of(Member member) {
         return new MemberResponseDto(
                 member.getNickname(),
                 member.getId(),
                 member.getDaylist(),
-                member.getWeeklist(),
-                member.getMonthlist()
+                member.getWeeklist()
         );
     }
 }

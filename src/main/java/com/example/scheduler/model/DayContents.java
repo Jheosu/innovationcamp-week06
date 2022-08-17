@@ -1,6 +1,5 @@
 package com.example.scheduler.model;
 
-import com.example.scheduler.dto.DayContentsPostRequestDto;
 import com.example.scheduler.dto.DayWeekRequestDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
@@ -39,12 +38,7 @@ public class DayContents extends Timestamped {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    public DayContents(String nickname, String contents) {
-        this.nickname = nickname;
-        this.contents = contents;
-    }
-
-    public void update(DayContentsPostRequestDto requestDto) {
+    public void update(DayWeekRequestDto requestDto) {
         this.title = requestDto.getTitle();
         this.contents = requestDto.getContents();
     }
@@ -54,19 +48,11 @@ public class DayContents extends Timestamped {
         member.addDaylist(this);
     }
 
-    public DayContents(DayContentsPostRequestDto requestDto) {
-        this.contents = requestDto.getContents();
-        this.title = requestDto.getTitle();
-        this.nickname = requestDto.getNickname();
-        this.daynum = requestDto.getDaynum();
-    }
-
     public DayContents(DayWeekRequestDto requestDto) {
         this.contents = requestDto.getContents();
         this.title = requestDto.getTitle();
         this.nickname = requestDto.getNickname();
         this.daynum = requestDto.getDaynum();
     }
-
 
 }

@@ -34,12 +34,8 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = ALL, orphanRemoval = true)
     private List<WeekContents> weeklist = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member", cascade = ALL, orphanRemoval = true)
-    private List<MonthContents> monthlist = new ArrayList<>();
-
     @Enumerated(EnumType.STRING)
     private Authority authority;
-
 
     @Builder
     public Member(String nickname, String username, String password, Authority authority) {
@@ -57,7 +53,4 @@ public class Member {
         weeklist.add(weekContents);
     }
 
-    public void addMonthlist(MonthContents monthContents) {
-        monthlist.add(monthContents);
-    }
 }
