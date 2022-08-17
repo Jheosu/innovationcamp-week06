@@ -1,16 +1,15 @@
 package com.example.scheduler.model;
 
+import com.example.scheduler.dto.DayWeekRequestDto;
 import com.example.scheduler.dto.WeekContentsPostRequestDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 import static javax.persistence.FetchType.LAZY;
 
-@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -32,13 +31,12 @@ public class WeekContents extends Timestamped {
     @Column(nullable = false)
     private String title;
 
-
     @JsonIgnore
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
-    public WeekContents(String nickname, String contents) {
+    public WeekContents() {
         this.nickname = nickname;
         this.contents = contents;
     }
@@ -57,6 +55,14 @@ public class WeekContents extends Timestamped {
         this.contents = requestDto.getContents();
         this.title = requestDto.getTitle();
         this.nickname = requestDto.getNickname();
-        this.daynum = Integer.parseInt(requestDto.getDaynum());
+        this.daynum = requestDto.getDaynum();
     }
+
+    public WeekContents(DayWeekRequestDto requestDto) {
+        this.contents = requestDto.getContents();
+        this.title = requestDto.getTitle();
+        this.nickname = requestDto.getNickname();
+        this.daynum = requestDto.getDaynum();
+    }
+
 }

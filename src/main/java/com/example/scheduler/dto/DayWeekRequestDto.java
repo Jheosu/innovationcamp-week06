@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class WeekContentsPostRequestDto {
+public class DayWeekRequestDto {
     private String title;
     private String contents;
     private String nickname;

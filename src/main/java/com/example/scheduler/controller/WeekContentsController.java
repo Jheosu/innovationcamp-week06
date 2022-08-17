@@ -33,17 +33,14 @@ public class WeekContentsController {
 
     // 일정 생성
     @PostMapping("/api/post/week")
-    public String createContents(@RequestBody WeekContentsPostRequestDto weekContentsPostRequestDto
-    ) {
+    public String createContents(@RequestBody WeekContentsPostRequestDto weekContentsPostRequestDto) {
         return weekContentsService.createContents(weekContentsPostRequestDto);
 
     }
 
     // 일정 수정
     @PutMapping("/api/post/week/{postId}")
-    public String updateCotents(@PathVariable Long postId,
-                                @RequestBody WeekContentsPostRequestDto weekContentsPostRequestDto
-    ) {
+    public String updateCotents(@PathVariable Long postId, @RequestBody WeekContentsPostRequestDto weekContentsPostRequestDto) {
         return weekContentsService.updateContents(weekContentsPostRequestDto, postId);
     }
 
@@ -51,7 +48,6 @@ public class WeekContentsController {
     @DeleteMapping("/api/post/week/{postId}")
     public String deleteContents(@PathVariable Long postId) {
         return weekContentsService.deleteContents(postId);
-
     }
 
 }

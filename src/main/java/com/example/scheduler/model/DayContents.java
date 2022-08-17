@@ -1,6 +1,7 @@
 package com.example.scheduler.model;
 
 import com.example.scheduler.dto.DayContentsPostRequestDto;
+import com.example.scheduler.dto.DayWeekRequestDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -54,6 +55,13 @@ public class DayContents extends Timestamped {
     }
 
     public DayContents(DayContentsPostRequestDto requestDto) {
+        this.contents = requestDto.getContents();
+        this.title = requestDto.getTitle();
+        this.nickname = requestDto.getNickname();
+        this.daynum = requestDto.getDaynum();
+    }
+
+    public DayContents(DayWeekRequestDto requestDto) {
         this.contents = requestDto.getContents();
         this.title = requestDto.getTitle();
         this.nickname = requestDto.getNickname();

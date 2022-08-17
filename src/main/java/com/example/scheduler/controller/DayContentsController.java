@@ -1,6 +1,7 @@
 package com.example.scheduler.controller;
 
 import com.example.scheduler.dto.DayContentsPostRequestDto;
+import com.example.scheduler.dto.DayWeekRequestDto;
 import com.example.scheduler.model.DayContents;
 import com.example.scheduler.model.Member;
 import com.example.scheduler.repository.DayContentsRepository;
@@ -34,9 +35,9 @@ public class DayContentsController {
 
     // 일정 생성
     @PostMapping("/api/post/day")
-    public String createContents(@RequestBody DayContentsPostRequestDto dayContentsPostRequestDto) {
+    public String createContents(@RequestBody DayWeekRequestDto requestDto) {
         System.out.println("포스팅 생성");
-        return dayContentsService.createContents(dayContentsPostRequestDto);
+        return dayContentsService.createContents(requestDto);
     }
 
     // 일정 수정
