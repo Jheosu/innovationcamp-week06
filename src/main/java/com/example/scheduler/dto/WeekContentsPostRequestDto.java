@@ -9,4 +9,5 @@ public class WeekContentsPostRequestDto {
     private String title;
     private String contents;
     private String nickname;
+    private String daynum;
 }

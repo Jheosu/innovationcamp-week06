@@ -2,11 +2,14 @@ package com.example.scheduler.service;
 
 import com.example.scheduler.dto.DayContentsPostRequestDto;
 import com.example.scheduler.model.DayContents;
+import com.example.scheduler.model.Member;
 import com.example.scheduler.repository.DayContentsRepository;
+import com.example.scheduler.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,10 +20,12 @@ public class DayContentsService {
 
     private final DayContentsRepository dayContentsRepository;
 
+    private final MemberRepository memberRepository;
+
     private final MemberService memberService;
 
     public List<DayContents> getContents() {
-        return dayContentsRepository.findAllByOrderByModifiedAtDesc();
+        return dayContentsRepository.findByNickname(getNickname());
     }
 
     public Optional<DayContents> getContent(Long id) {
@@ -30,7 +35,11 @@ public class DayContentsService {
 
     public String createContents(DayContentsPostRequestDto dayContentsPostRequestDto) {
         dayContentsPostRequestDto.setNickname(getNickname());
+        Member member = memberRepository.findById(memberService.getMyInfo().getId()).orElseThrow(() -> new RuntimeException("해당하는 유저가 없습니다"));
+        dayContentsPostRequestDto.setDaynum(getDayOfWeek());
         DayContents dayContents = new DayContents(dayContentsPostRequestDto);
+        dayContents.confirmPost(member);
+
         dayContentsRepository.save(dayContents);
         return "등록완료";
     }
@@ -43,7 +52,7 @@ public class DayContentsService {
         String msg;
         if (dayContents.getNickname().equals(getNickname())) {
             String dayContent = dayContentsPostRequestDto.getContents();
-            dayContents.setContents(dayContent);
+            dayContents.update(dayContentsPostRequestDto);
             dayContentsRepository.save(dayContents);
             msg = "수정완료";
         } else {
@@ -68,4 +77,11 @@ public class DayContentsService {
     private String getNickname() {
         return memberService.getMyInfo().getNickname();
     }
+
+    public int getDayOfWeek() {
+        Calendar rightNow = Calendar.getInstance();
+        int day_of_week = rightNow.get(Calendar.DAY_OF_WEEK);
+        return day_of_week;
+    }
+
 }

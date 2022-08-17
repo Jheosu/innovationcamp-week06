@@ -1,4 +1,4 @@
-package com.example.scheduler.service;
+package com.example.scheduler.repository;
 
 import com.example.scheduler.model.RefreshToken;
 import org.springframework.data.jpa.repository.JpaRepository;

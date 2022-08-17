@@ -7,6 +7,7 @@ import com.example.scheduler.dto.TokenRequestDto;
 import com.example.scheduler.model.Member;
 import com.example.scheduler.model.RefreshToken;
 import com.example.scheduler.repository.MemberRepository;
+import com.example.scheduler.repository.RefreshTokenRepository;
 import com.example.scheduler.security.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

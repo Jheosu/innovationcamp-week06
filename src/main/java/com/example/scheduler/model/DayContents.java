@@ -1,11 +1,14 @@
 package com.example.scheduler.model;
 
 import com.example.scheduler.dto.DayContentsPostRequestDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+
+import static javax.persistence.FetchType.LAZY;
 
 @NoArgsConstructor
 @Getter
@@ -13,7 +16,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Daycontents")
 public class DayContents extends Timestamped {
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
 
@@ -26,8 +29,13 @@ public class DayContents extends Timestamped {
     @Column(nullable = false)
     private String title;
 
+    @Column(nullable = false)
+    private int daynum;
+
     // LAZY - 삭제 동작 안해서 다시 변경
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "member_id")
     private Member member;
 
     public DayContents(String nickname, String contents) {
@@ -36,12 +44,21 @@ public class DayContents extends Timestamped {
     }
 
     public void update(DayContentsPostRequestDto requestDto) {
+        this.title = requestDto.getTitle();
         this.contents = requestDto.getContents();
+    }
+
+    public void confirmPost(Member member) {
+        this.member = member;
+        member.addDaylist(this);
     }
 
     public DayContents(DayContentsPostRequestDto requestDto) {
         this.contents = requestDto.getContents();
         this.title = requestDto.getTitle();
         this.nickname = requestDto.getNickname();
+        this.daynum = requestDto.getDaynum();
     }
+
+
 }
