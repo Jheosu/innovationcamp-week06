@@ -9,4 +9,6 @@ public interface DayContentsRepository extends JpaRepository<DayContents, Long> 
     List<DayContents> findAllByOrderByModifiedAtDesc();
 
     List<DayContents> findByNickname(String nickname);
+
+
 }

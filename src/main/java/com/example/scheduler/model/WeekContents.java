@@ -16,7 +16,7 @@ import static javax.persistence.FetchType.LAZY;
 @Entity
 @Table(name = "Weekcontents")
 public class WeekContents extends Timestamped {
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
 
@@ -27,9 +27,12 @@ public class WeekContents extends Timestamped {
     private String contents;
 
     @Column(nullable = false)
+    private int daynum;
+
+    @Column(nullable = false)
     private String title;
 
-    // LAZY - 삭제 동작 안해서 다시 변경
+
     @JsonIgnore
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id")
@@ -54,5 +57,6 @@ public class WeekContents extends Timestamped {
         this.contents = requestDto.getContents();
         this.title = requestDto.getTitle();
         this.nickname = requestDto.getNickname();
+        this.daynum = requestDto.getDaynum();
     }
 }

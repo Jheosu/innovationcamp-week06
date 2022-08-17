@@ -23,7 +23,7 @@ public class WeekContentsService {
     private final MemberService memberService;
 
     public List<WeekContents> getContents() {
-        return weekContentsRepository.findAllByOrderByModifiedAtDesc();
+        return weekContentsRepository.findByNickname(getNickname());
     }
 
     public Optional<WeekContents> getContent(Long id) {

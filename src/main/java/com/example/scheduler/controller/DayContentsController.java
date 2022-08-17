@@ -5,6 +5,7 @@ import com.example.scheduler.model.DayContents;
 import com.example.scheduler.model.Member;
 import com.example.scheduler.repository.DayContentsRepository;
 import com.example.scheduler.service.DayContentsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,16 +14,11 @@ import java.util.Optional;
 
 
 @RestController
+@RequiredArgsConstructor
 public class DayContentsController {
 
     private final DayContentsService dayContentsService;
     private final DayContentsRepository dayContentsRepository;
-
-    public DayContentsController(DayContentsService dayContentsService, DayContentsRepository dayContentsRepository) {
-        this.dayContentsService = dayContentsService;
-        this.dayContentsRepository = dayContentsRepository;
-    }
-
 
     @GetMapping("/api/post/day")
     public List<DayContents> getContents() {
@@ -35,11 +31,6 @@ public class DayContentsController {
         return dayContentsService.getContent(postId);
     }
 
-    @GetMapping("/api/post/day/name/{nickname}")
-    public List<DayContents> getContentname(@PathVariable String nickname) {
-        return dayContentsRepository.findByNickname(nickname);
-    }
-
 
     // 일정 생성
     @PostMapping("/api/post/day")
@@ -50,8 +41,7 @@ public class DayContentsController {
 
     // 일정 수정
     @PutMapping("/api/post/day/{postId}")
-    public String updateCotents(@PathVariable Long postId,
-                                @RequestBody DayContentsPostRequestDto dayContentsPostRequestDto) {
+    public String updateCotents(@PathVariable Long postId, @RequestBody DayContentsPostRequestDto dayContentsPostRequestDto) {
 
         System.out.println(dayContentsPostRequestDto.getContents());
         return dayContentsService.updateContents(dayContentsPostRequestDto, postId);

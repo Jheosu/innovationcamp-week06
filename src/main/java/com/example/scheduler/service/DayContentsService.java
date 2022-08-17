@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +25,7 @@ public class DayContentsService {
     private final MemberService memberService;
 
     public List<DayContents> getContents() {
-        return dayContentsRepository.findAllByOrderByModifiedAtDesc();
+        return dayContentsRepository.findByNickname(getNickname());
     }
 
     public Optional<DayContents> getContent(Long id) {
@@ -35,7 +36,7 @@ public class DayContentsService {
     public String createContents(DayContentsPostRequestDto dayContentsPostRequestDto) {
         dayContentsPostRequestDto.setNickname(getNickname());
         Member member = memberRepository.findById(memberService.getMyInfo().getId()).orElseThrow(() -> new RuntimeException("해당하는 유저가 없습니다"));
-
+        dayContentsPostRequestDto.setDaynum(getDayOfWeek());
         DayContents dayContents = new DayContents(dayContentsPostRequestDto);
         dayContents.confirmPost(member);
 
@@ -76,4 +77,11 @@ public class DayContentsService {
     private String getNickname() {
         return memberService.getMyInfo().getNickname();
     }
+
+    public int getDayOfWeek() {
+        Calendar rightNow = Calendar.getInstance();
+        int day_of_week = rightNow.get(Calendar.DAY_OF_WEEK);
+        return day_of_week;
+    }
+
 }
