@@ -2,7 +2,7 @@ package com.example.scheduler.controller;
 
 import com.example.scheduler.dto.DayWeekRequestDto;
 import com.example.scheduler.model.DayContents;
-import com.example.scheduler.service.DayContentsService;
+import com.example.scheduler.model.service.DayContentsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

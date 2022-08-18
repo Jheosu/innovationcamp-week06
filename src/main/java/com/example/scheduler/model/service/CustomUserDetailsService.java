@@ -1,4 +1,4 @@
-package com.example.scheduler.service;
+package com.example.scheduler.model.service;
 
 import com.example.scheduler.model.Member;
 import com.example.scheduler.repository.MemberRepository;

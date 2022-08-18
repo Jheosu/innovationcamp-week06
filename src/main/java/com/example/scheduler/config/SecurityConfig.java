@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.addAllowedOriginPattern(CorsConfiguration.ALL);
+        corsConfiguration.addAllowedOrigin("http://sparta6week.s3-website.ap-northeast-2.amazonaws.com");
         corsConfiguration.addAllowedHeader(CorsConfiguration.ALL); // 허용할 Header
         corsConfiguration.addAllowedMethod(CorsConfiguration.ALL); // 허용할 Method
         corsConfiguration.addExposedHeader(CorsConfiguration.ALL);

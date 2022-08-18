@@ -5,9 +5,7 @@ import com.example.scheduler.model.DayContents;
 import com.example.scheduler.model.Member;
 import com.example.scheduler.model.WeekContents;
 import com.example.scheduler.repository.DayContentsRepository;
-import com.example.scheduler.repository.MemberRepository;
 import com.example.scheduler.repository.WeekContentsRepository;
-import com.example.scheduler.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -24,12 +22,8 @@ public class Scheduler {
     private final WeekContentsRepository weekContentsRepository;
     private final DayContentsRepository dayContentsRepository;
 
-    private final MemberRepository memberRepository;
 
-
-    private final MemberService memberService;
-
-    @Scheduled(cron = "0 0/2 * * * *")
+    @Scheduled(cron = "0 0 1 * * *")
     @Transactional
     public void deleteday() {
         dayContentsRepository.deleteAll();
@@ -38,7 +32,7 @@ public class Scheduler {
         if (getDayOfWeek() == 7) {
             weekContentsList = weekContentsRepository.findByDaynum(1);
         } else {
-            weekContentsList = weekContentsRepository.findByDaynum(getDayOfWeek() + 1);
+            weekContentsList = weekContentsRepository.findByDaynum(getDayOfWeek());
         }
 
         if (weekContentsList != null) {
@@ -49,6 +43,7 @@ public class Scheduler {
                         .nickname(weekContents.getNickname())
                         .daynum(weekContents.getDaynum())
                         .build();
+
                 Member member = weekContents.getMember();
                 DayContents dayContents = new DayContents(requestDto);
                 dayContents.confirmPost(member);
@@ -68,8 +63,7 @@ public class Scheduler {
 
     public int getDayOfWeek() {
         Calendar rightNow = Calendar.getInstance();
-        int day_of_week = rightNow.get(Calendar.DAY_OF_WEEK);
-        return day_of_week;
+        return rightNow.get(Calendar.DAY_OF_WEEK);
     }
 
 }
