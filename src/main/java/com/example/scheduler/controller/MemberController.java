@@ -1,7 +1,7 @@
 package com.example.scheduler.controller;
 
 import com.example.scheduler.dto.MemberResponseDto;
-import com.example.scheduler.service.MemberService;
+import com.example.scheduler.model.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

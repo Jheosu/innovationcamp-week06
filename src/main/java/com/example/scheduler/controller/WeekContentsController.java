@@ -2,7 +2,7 @@ package com.example.scheduler.controller;
 
 import com.example.scheduler.dto.DayWeekRequestDto;
 import com.example.scheduler.model.WeekContents;
-import com.example.scheduler.service.WeekContentsService;
+import com.example.scheduler.model.service.WeekContentsService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

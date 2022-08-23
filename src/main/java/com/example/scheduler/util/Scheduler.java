@@ -5,9 +5,7 @@ import com.example.scheduler.model.DayContents;
 import com.example.scheduler.model.Member;
 import com.example.scheduler.model.WeekContents;
 import com.example.scheduler.repository.DayContentsRepository;
-import com.example.scheduler.repository.MemberRepository;
 import com.example.scheduler.repository.WeekContentsRepository;
-import com.example.scheduler.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -38,7 +36,7 @@ public class Scheduler {
         if (getDayOfWeek() == 7) {
             weekContentsList = weekContentsRepository.findByDaynum(1);
         } else {
-            weekContentsList = weekContentsRepository.findByDaynum(getDayOfWeek() + 1);
+            weekContentsList = weekContentsRepository.findByDaynum(getDayOfWeek());
         }
 
         if (weekContentsList != null) {
@@ -68,8 +66,7 @@ public class Scheduler {
 
     public int getDayOfWeek() {
         Calendar rightNow = Calendar.getInstance();
-        int day_of_week = rightNow.get(Calendar.DAY_OF_WEEK);
-        return day_of_week;
+        return rightNow.get(Calendar.DAY_OF_WEEK);
     }
 
 }

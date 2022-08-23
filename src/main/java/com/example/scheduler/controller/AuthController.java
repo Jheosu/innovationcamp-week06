@@ -4,7 +4,7 @@ import com.example.scheduler.dto.MemberRequestDto;
 import com.example.scheduler.dto.MemberResponseDto;
 import com.example.scheduler.dto.TokenDto;
 import com.example.scheduler.dto.TokenRequestDto;
-import com.example.scheduler.service.AuthService;
+import com.example.scheduler.model.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

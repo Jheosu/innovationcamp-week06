@@ -11,6 +11,5 @@ public interface WeekContentsRepository extends JpaRepository<WeekContents, Long
 
     List<WeekContents> findByNickname(String nickname);
 
-
     List<WeekContents> findByDaynum(int daynum);
 }
