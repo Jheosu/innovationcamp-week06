@@ -21,6 +21,11 @@ public class DayContentsController {
         return dayContentsService.getContents();
     }
 
+    @GetMapping("")
+    public String test() {
+        return "자동배포 테스트";
+    }
+
     // 일정 조회
     @GetMapping("/api/post/day/{postId}")
     public Optional<DayContents> getContent(@PathVariable Long postId) {
