@@ -5,6 +5,7 @@ files:
     destination: /home/ubuntu/app/travis/build/
     overwrite: yes
 
+
 hooks:
   ApplicationStart:
     - location: deploy.sh
