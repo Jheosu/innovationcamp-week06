@@ -23,7 +23,7 @@ public class DayContentsController {
 
     @GetMapping("")
     public String test() {
-        return "travis ci 자동배포 테스트변경";
+        return "travis ci 자동배포 테스트변경ㅇㅇ";
     }
 
     // 일정 조회
