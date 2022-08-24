@@ -10,6 +10,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 public class SchedulerApplication {
 
+    static {
+        System.setProperty("spring.config.location", "classpath:/application.yml,classpath:/jwt.yml");
+    }
+
 
     public static void main(String[] args) {
         SpringApplication.run(SchedulerApplication.class, args);
