@@ -23,7 +23,7 @@ public class DayContentsController {
 
     @GetMapping("")
     public String test() {
-        return "자동배포 테스트";
+        return "자동배포 테스트dd";
     }
 
     // 일정 조회
