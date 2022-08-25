@@ -11,9 +11,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class SchedulerApplication {
 
 
-    static {
-        System.setProperty("spring.config.location", "classpath:/application.yml,classpath:/jwt.yml");
-    }
+//    static {
+//        System.setProperty("spring.config.location", "classpath:/application.yml,classpath:/jwt.yml");
+//    }
 
 
     public static void main(String[] args) {
