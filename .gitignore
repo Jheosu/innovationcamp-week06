@@ -6,6 +6,7 @@ build/
 !**/src/test/**/build/
 
 src/main/resources/jwt.yml
+src/main/resources/application.yml
 
 ### STS ###
 .apt_generated
